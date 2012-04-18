@@ -1,0 +1,5 @@
+Kienct examples for beginners !
+
+
+1 ) ofxKinect example with all kinect functionality moved to a "simple kinect" class
+2 ) Simple workspace that overlays the openCV contours with additive blend mode over depth feed
