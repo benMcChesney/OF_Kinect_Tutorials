@@ -7,3 +7,7 @@ This github repository hosts my examples for teaching students how to use a KINE
 	Allows a user to position the skeleton into "poses" and export them
 	Allows a user to read in an exported pose and determing if the pose is being made
 	Fires off a simple event system for POSE_START, POSE_RECOGNZIED , and POSE_END
+	
+	/* future additions will be added !!!! */
+	
+	
