@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="SkeletonBasics.cpp" />
+    <ClCompile Include="ofxOsc\src\ofxOscBundle.cpp">
+      <Filter>ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\src\ofxOscMessage.cpp">
+      <Filter>ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\src\ofxOscReceiver.cpp">
+      <Filter>ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\src\ofxOscSender.cpp">
+      <Filter>ofxOsc\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp">
+      <Filter>ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\libs\oscpack\src\ip\posix\NetworkingUtils.cpp">
+      <Filter>ofxOsc\libs\oscpack\src\ip\posix</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\libs\oscpack\src\ip\posix\UdpSocket.cpp">
+      <Filter>ofxOsc\libs\oscpack\src\ip\posix</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtilsWin.cpp">
+      <Filter>ofxOsc\libs\oscpack\src\ip\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\libs\oscpack\src\ip\win32\UdpSocketWin.cpp">
+      <Filter>ofxOsc\libs\oscpack\src\ip\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="ofxOsc\libs\oscpack\src\osc\OscTypes.cpp">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SkeletonBasics.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="ofxOsc\src\ofxOsc.h">
+      <Filter>ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\src\ofxOscArg.h">
+      <Filter>ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\src\ofxOscBundle.h">
+      <Filter>ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\src\ofxOscMessage.h">
+      <Filter>ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\src\ofxOscReceiver.h">
+      <Filter>ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\src\ofxOscSender.h">
+      <Filter>ofxOsc\src</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\ip\IpEndpointName.h">
+      <Filter>ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h">
+      <Filter>ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\ip\PacketListener.h">
+      <Filter>ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\ip\TimerListener.h">
+      <Filter>ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\ip\UdpSocket.h">
+      <Filter>ofxOsc\libs\oscpack\src\ip</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\osc\OscException.h">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\osc\OscPacketListener.h">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxOsc\libs\oscpack\src\osc\OscTypes.h">
+      <Filter>ofxOsc\libs\oscpack\src\osc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SkeletonBasics.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ofxOsc">
+      <UniqueIdentifier>{4c8dc1d7-d414-4ed7-b2c4-660643aabb06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="of_core">
+      <UniqueIdentifier>{c210d93b-a16c-4873-b738-cb9424e7d299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="of_core\utils">
+      <UniqueIdentifier>{d36c7458-a42a-408d-87b2-8615bc6ff59d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxOsc\src">
+      <UniqueIdentifier>{fafdb6a2-91c2-405e-8bd4-381cdf4a1808}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxOsc\libs">
+      <UniqueIdentifier>{1ed71664-2101-4791-9b4e-c5ee4209763d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxOsc\libs\oscpack">
+      <UniqueIdentifier>{4d9569d8-9f81-4e24-afeb-245627a6c952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxOsc\libs\oscpack\src">
+      <UniqueIdentifier>{038e97bb-fd4b-40f7-9d7f-715f18571697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxOsc\libs\oscpack\src\ip">
+      <UniqueIdentifier>{d626ab78-f2dc-4f4a-9258-a16cac2130cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxOsc\libs\oscpack\src\osc">
+      <UniqueIdentifier>{072a5160-8b6c-4fcd-9d80-9339988052db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxOsc\libs\oscpack\src\ip\posix">
+      <UniqueIdentifier>{af501239-4e71-4947-8b4d-df6bb59ac426}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxOsc\libs\oscpack\src\ip\win32">
+      <UniqueIdentifier>{7e777d08-2a9d-4991-8af1-76a534b54b91}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

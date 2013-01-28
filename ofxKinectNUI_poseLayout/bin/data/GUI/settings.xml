@@ -1,0 +1,20 @@
+<Widget>
+    <Kind>2</Kind>
+    <Name>LISTEN TO OSC</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>DRAW LABELS</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>CHECK FOR GESTURES</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>ANGLE TOLERANCE</Name>
+    <Value>11.2971</Value>
+</Widget>
