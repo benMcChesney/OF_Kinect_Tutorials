@@ -1,5 +1,9 @@
-Kienct examples for beginners !
 
+Written for Open Frameworks 0071 by Ben McChesney
+This github repository hosts my examples for teaching students how to use a KINECT with Open Frameworks
 
-1 ) ofxKinect example with all kinect functionality moved to a "simple kinect" class
-2 ) Simple workspace that overlays the openCV contours with additive blend mode over depth feed
+1 ) /SkeletonBasics-D2D is the MS SDK example modified to send skeleton data out via OSC on port 54321
+2 ) /ofxKinectNUI_poseLayout/ is a bit of a beast right now it does several things.
+	Allows a user to position the skeleton into "poses" and export them
+	Allows a user to read in an exported pose and determing if the pose is being made
+	Fires off a simple event system for POSE_START, POSE_RECOGNZIED , and POSE_END
