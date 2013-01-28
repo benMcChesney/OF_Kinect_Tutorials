@@ -23,14 +23,18 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
+		//holds all our skeleton data and listens to OSC
 		BasicSkeleton skeleton ; 
+
+		//Takes in the skeleton data and loads all gesture XMLs
 		PoseGestureHub poseHub ;
 
-
+		//Event Handlers
 		void poseRecognizedEventHandler( string &args ) ; 
 		void poseStartEventHandler( string &args ) ; 
 		void poseEndEventHandler( string &args ) ; 
 
+		//Easy UI to make thigns easier to change
 		ofxUICanvas * gui ;   
 		void setupUI () ; 
 		void guiEvent(ofxUIEventArgs &e);

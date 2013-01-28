@@ -4,10 +4,12 @@
 
 void PoseGestureHub::setup ( ) 
 {
+	//Default values
 	bDetectGestures = false ; 
 	numExported = 0; 
 	poseAngleTolerance = 15 ; 
 	bDrawOverlays = false ; 
+	poseHoldTime = 0.5f ; 
 }
 		
 void PoseGestureHub::update ( BasicSkeleton skeleton ) 
@@ -20,7 +22,16 @@ void PoseGestureHub::update ( BasicSkeleton skeleton )
 	}
 }
 
-
+void PoseGestureHub::setPoseHoldTime( float time ) 
+{
+	if ( poses.size()  > 0 ) 
+	{
+		for ( int i = 0 ; i < poses.size() ; i++ )
+		{
+			poses[i]->gestureHoldTime = time ; 
+		}
+	}
+}
 void PoseGestureHub::draw ( BasicSkeleton skeleton  ) 
 {
 	if ( bDrawOverlays ) 
@@ -138,8 +149,6 @@ void PoseGestureHub::drawDebug( )
 
 PoseGesture* PoseGestureHub::getPoseByLabel( string label ) 
 {
-	//
-
 	for ( int i = 0 ; i < poses.size() ; i++ ) 
 	{
 		//Found a match !

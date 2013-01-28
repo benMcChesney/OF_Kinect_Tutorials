@@ -16,5 +16,10 @@
 <Widget>
     <Kind>4</Kind>
     <Name>ANGLE TOLERANCE</Name>
-    <Value>11.2971</Value>
+    <Value>13.9331</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>POSE HOLD DURATION</Name>
+    <Value>0.53954</Value>
 </Widget>

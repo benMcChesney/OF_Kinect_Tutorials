@@ -2,6 +2,7 @@
 
 void PoseGesture::setup ( string _label , int _gestureIndex ) 
 {
+	//Default parmaters
 	gestureIndex = _gestureIndex ;
 	label = _label ; 
 	lastGestureActivateTime = -1.0f ; 
@@ -11,12 +12,15 @@ void PoseGesture::setup ( string _label , int _gestureIndex )
 	totalAngleDiff = 0.0f  ; 
 	gestureCompletion = 0.0f ; 
 	debugColor = ofColor::fromHsb( ofRandom(255 ) , 255 , 255 ) ;  
+
+	//Default radius of 25
 	poseTimer.setup( 25 , debugColor ); 
 
 }
 
 void PoseGesture::update ( ) 
 {
+	//update our timer
 	poseTimer.normalizedTime = gestureCompletion ; 
 	poseTimer.update() ; 
 }
@@ -31,6 +35,7 @@ void PoseGesture::draw( BasicSkeleton skeleton )
 {
 	for ( int i = 0 ; i < anglesAlignment.size() ; i++ ) 
 	{
+		/* NOT IMPLEMENTED !!!! */
 		if ( anglesAlignment[i] == true ) 
 		{
 			//anglesAlignment
@@ -51,18 +56,18 @@ void PoseGesture::addJoint( int index , float angle )
 void PoseGesture::checkGesture( BasicSkeleton skeleton )
 {
 	totalAngleDiff = 0.0f ; 
+	//We use this to see if the chain was broken THIS Frame as opposed to LAST FRAME
 	bool bBroken = false ; 
 	for ( int i = 0 ; i < angles.size() ; i++ ) 
 	{
-		
 		float angleDiff = skeleton.joints[  jointIndicies[i]  ].connectionAngle - angles[i] ;  
+		//Get the absolute difference
 		if ( abs(angleDiff) > angleTolerance ) 
 		{
 			//ANGLE IS TOO FAR OFF
 			angleDiff = 0 ; 
 			anglesAlignment[i] = false ; 
 			bBroken = true ; 
-		//	return ; 
 		}
 		else
 		{
@@ -71,20 +76,13 @@ void PoseGesture::checkGesture( BasicSkeleton skeleton )
 		totalAngleDiff += angleDiff ; 
 	}
 
-	/*
-		float angleTolerance ;					//Threshold ( error tolerance ) of angle for a trigger 
-		float gestureHoldTime ;				//Users have to hold the gesture for a short amount of time
-
-		float lastGestureActivateTime ;		//For counting time
-
-		ofEvent<string> POSE_START ;
-		ofEvent<string> POSE_END ; 
-*/
-	//PoseGestureEvents
+	//The skeleton is in alignment this frame !
 	if ( bBroken == false ) 
 	{
+		//Is the gesutre already active ?
 		if ( bGestureActive == false ) 
 		{
+			//Has the gesture started ?
 			if ( lastGestureActivateTime < 0 ) 
 			{
 				lastGestureActivateTime = ofGetElapsedTimef() ; 
@@ -109,6 +107,8 @@ void PoseGesture::checkGesture( BasicSkeleton skeleton )
 	}
 	else
 	{
+		//Skeleton is not in alignment
+
 		//Be sure to fire an end event if there was any progress
 		if( gestureCompletion > 0.0f ) 
 			ofNotifyEvent( PoseGestureEvents::Instance()->POSE_END , label ) ; 

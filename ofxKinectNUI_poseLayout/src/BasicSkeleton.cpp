@@ -2,6 +2,7 @@
 
 void BasicSkeleton::setup ( ) 
 {
+	//Default stuff out
 	bDetected = false ; 
 	loadLabelsFromXml( )  ; 
 	loadDefaultLayoutPositions( ) ; 
@@ -11,17 +12,21 @@ void BasicSkeleton::setup ( )
 	osc = new ofxOscReceiver( ) ; 
 	osc->setup( 54321 ) ; 
 
+	//I just eyeballed these numbers, seemed to center the skeleton on the screen well
 	skeletonBounds = ofRectangle( 300 , 300 , 300 , 300 ) ; 
 	bListenToOsc = false ; 
 }
 
 void BasicSkeleton::update ( )
 {
+	//Update the joints positions
 	for ( int i = 0 ; i < joints.size() ; i++ ) 
 	{
 		joints[i].update( ) ; 
 	}
 
+
+	//with new positions, update the new angles
 	for ( int i = 0 ; i < joints.size() ; i++ ) 
 	{
 		joints[i].updateAngle( joints[joints[i].connectionIndex].position ) ; 
@@ -45,17 +50,14 @@ void BasicSkeleton::updateOsc( )
 		{
 			loop++ ; 
 			int numArgs = m.getNumArgs() ; 
-			//cout << "number of arguments " << numArgs << endl ; 
-			//int jointNum = 0 ; 
 			int argNum = 0 ; 
-			//cout << "loop : " << loop++ << endl ; 
+			//We have 20 joints !
 			for ( int j = 0 ; j < 20 ; j++ ) 
 			{
 				//cout << "@ joint : " << j << endl ; 
 				joints[j].position.x = m.getArgAsFloat( argNum ) * skeletonBounds.width + skeletonBounds.x ; 
 				joints[j].position.y = ( -m.getArgAsFloat( argNum+1 ) ) * skeletonBounds.height + skeletonBounds.y ;
-
-			//	cout << " raw x : " <<  m.getArgAsFloat( argNum ) << " , raw y : " <<  m.getArgAsFloat( argNum+1 ) << endl ;
+				//cout << " raw x : " <<  m.getArgAsFloat( argNum ) << " , raw y : " <<  m.getArgAsFloat( argNum+1 ) << endl ;
 				argNum += 2 ;
 			}
 			return ; 
@@ -66,18 +68,20 @@ void BasicSkeleton::updateOsc( )
 
 void BasicSkeleton::draw( ) 
 {
+	//Red signifies nothing, just easy to see
 	ofSetColor( 255 , 12 , 0 ) ; 
 	for ( int i = 0 ; i < joints.size() ; i++ ) 
 	{
-		ofCircle( joints[i].position , 5 ) ; 
-		//joints[i].drawConnection( joints[joints[i].connectionIndex].position ) ; 
+		ofCircle( joints[i].position , 5 ) ;  
 	}
 
+	//Draw all the connections , FAT end is the start, skinny end is the END
 	for ( int i = 0 ; i < joints.size() ; i++ ) 
 	{
 		joints[i].drawConnection( joints[joints[i].connectionIndex].position ) ; 
 	}
 
+	//Draw debug labels if enabled
 	if ( bDrawLabels ) 
 	{
 		for ( int i = 0 ; i < joints.size() ; i++ ) 
@@ -86,6 +90,7 @@ void BasicSkeleton::draw( )
 		}
 	}
 
+	/* THIS DOES NOTHING !!!! */
 	if ( bDrawAngles ) 
 	{
 		for ( int i = 0 ; i < joints.size() ; i++ ) 
@@ -94,6 +99,7 @@ void BasicSkeleton::draw( )
 		}
 	}
 
+	//Normal draw!
 	for ( int i = 0 ; i < joints.size() ; i++ ) 
 	{
 		joints[i].draw( ) ; 

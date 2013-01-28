@@ -8,7 +8,7 @@
 class PoseGestureEvents
 {
 public : 
-	static PoseGestureEvents* Instance()
+		static PoseGestureEvents* Instance()
         {
              static PoseGestureEvents inst ;
              return &inst ;

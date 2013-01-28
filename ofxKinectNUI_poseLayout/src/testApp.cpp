@@ -11,7 +11,8 @@ void testApp::setup()
 	//load premade configs from XML
 	poseHub.loadPose( "jesus_pose.xml" ) ; 
 	poseHub.loadPose( "standing_pose.xml" ) ; 
-	poseHub.loadPose( "tStance_pose.xml" ) ; 
+	poseHub.loadPose( "tStance_pose.xml" ) ;
+	poseHub.loadPose( "raisedHands_pose.xml" ) ; 
 
 	ofSetFrameRate( 30 ) ; 
 
@@ -25,6 +26,7 @@ void testApp::setup()
 
 //--------------------------------------------------------------
 void testApp::update(){
+
 	skeleton.update( ) ; 
 	poseHub.update( skeleton ) ;
 	skeleton.updateOsc() ; 
@@ -95,8 +97,9 @@ void testApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
+
 	if ( x < 300 ) return ; 
-	skeleton.getClosestJointIndexTo( x , y ) ; 
+		skeleton.getClosestJointIndexTo( x , y ) ; 
 }
 
 //--------------------------------------------------------------
@@ -117,7 +120,6 @@ void testApp::mousePressed(int x, int y, int button)
 	int closestIndex = skeleton.getClosestJointIndexTo( x , y ) ; 
 	if ( button == 0 ) 
 	{
-		
 		skeleton.joints[ closestIndex ].position = ofPoint ( x , y ) ; 
 	}
 	if ( button == 1 ) 
@@ -155,6 +157,7 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 
 void testApp::setupUI ()
 {
+	//Setup OFXUI and all the default variables
 	float xInit = OFX_UI_GLOBAL_WIDGET_SPACING; 
     float length = 255-xInit; 
 	float dim = 20; 
@@ -164,11 +167,10 @@ void testApp::setupUI ()
 	gui->addWidgetDown(new ofxUIToggle( dim , dim , skeleton.bListenToOsc ,"LISTEN TO OSC" ) );  
 	gui->addWidgetDown(new ofxUIToggle( dim , dim , skeleton.bDrawLabels ,"DRAW LABELS" ) );
 	gui->addWidgetDown(new ofxUIToggle( dim , dim , poseHub.bDetectGestures ,"CHECK FOR GESTURES" ) );
-	
-
 	gui->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.0, 90.0f , poseHub.poseAngleTolerance , "ANGLE TOLERANCE")); 
- 
-	
+	gui->addWidgetDown(new ofxUISlider(length-xInit,dim, 0.05, 2.0f , poseHub.poseHoldTime , "POSE HOLD DURATION")); 
+ 	
+	//Add new sliders here !
 	ofAddListener(gui->newGUIEvent,this,&testApp::guiEvent);
 	gui->loadSettings( "GUI/settings.xml" ) ;
 }
@@ -177,15 +179,18 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 {
 	string name = e.widget->getName(); 
 	int kind = e.widget->getKind(); 
-	cout << "got event from: " << name << endl; 	
+	//cout << "got event from: " << name << endl; 	
 	
 	if ( name == "ANGLE TOLERANCE" ) poseHub.setPoseAngleTolerance(  ((ofxUISlider *) e.widget)->getScaledValue() ) ; 
+	if ( name == "POSE HOLD DURATION" ) poseHub.setPoseHoldTime(  ((ofxUISlider *) e.widget)->getScaledValue() ) ; 
 
 	if ( name == "LISTEN TO OSC" ) skeleton.bListenToOsc = ((ofxUIToggle *) e.widget)->getValue() ;
 	if ( name == "DRAW LABELS" ) skeleton.bDrawLabels = ((ofxUIToggle *) e.widget)->getValue() ;
 	if ( name == "CHECK FOR GESTURES"  ) poseHub.bDetectGestures = ((ofxUIToggle *) e.widget)->getValue() ;
-	
-	/* example 
+
+	//Handle new sliders here !
+
+	/* non-compressed example
 	if(name == "RED")
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget; 

@@ -12,16 +12,16 @@ class SkeletonJoint
 		void updateAngle ( ofPoint connectionPosition ) ; 
 		void draw ( ) ; 
 
-		int jointIndex ; 
-		int connectionIndex ; 
-		float connectionAngle ; 
-		string label ; 
+		int jointIndex ;			//It's own skeleton index
+		int connectionIndex ;		//It's target index
+		float connectionAngle ;		//Angle from itself to target ( degrees ? ) 
+		string label ;				//Joint label such as 'head'
 
-		ofPoint position ; 
-
+		ofPoint position ;			//Position in SCREEN SPACE
+			
 		void drawConnection( ofPoint connectionPosition ) ;
 		void drawLabel ( ) ; 
 		void drawAngle ( ) ; 
 
-		bool bHover ; 
+		bool bHover ;			//If on mouse move it's the closest point... I had plans for this but now I forget
 };
