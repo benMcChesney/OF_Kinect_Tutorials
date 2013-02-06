@@ -26,37 +26,32 @@ void testApp::setup() {
 	grayThreshNear.allocate(kinect.width, kinect.height);
 	grayThreshFar.allocate(kinect.width, kinect.height);
 	
-	nearThreshold = 230;
-	farThreshold = 70;
-	bThreshWithOpenCV = true;
-	
+
 	ofSetFrameRate(60);
-	
-	// zero the tilt on startup
-	angle = 0;
-	kinect.setCameraTiltAngle(angle);
-	
-	// start from the front
-	bDrawPointCloud = false;
+
+    bKinectOpen = true ; 
     
-    minBlobSize = 20 ;
-    maxBlobSize = (kinect.width*kinect.height)/2 ;
-    pointCloudMinZ = -100 ;
-    pointCloudMaxZ = 100 ;
-    
-    meshHueOffset = 0.0f ;
-    
+    setup_ofxUI() ;
+}
+
+void testApp::setup_ofxUI()
+{
     //Setup ofxUI
     float dim = 24;
 	float xInit = OFX_UI_GLOBAL_WIDGET_SPACING;
-    float length = 320-xInit;
+    guiWidth = 210-xInit;
     
-    gui = new ofxUICanvas(0, 0, length+xInit, ofGetHeight());
+    gui = new ofxUICanvas(0, 0, guiWidth+xInit, ofGetHeight());
 	gui->addWidgetDown(new ofxUILabel("KINECT PARAMS", OFX_UI_FONT_MEDIUM ));
-    gui->addWidgetDown(new ofxUIRangeSlider(length, dim, 0.0, 255.0, farThreshold, nearThreshold, "DEPTH RANGE"));
-    gui->addWidgetDown(new ofxUIRangeSlider(length, dim, 0.0, ((kinect.width * kinect.height ) / 2 ), minBlobSize , maxBlobSize, "OPENCV BLOB SIZE"));
-    gui->addWidgetDown(new ofxUIRangeSlider(length, dim, 0 , 2000 , pointCloudMinZ , pointCloudMaxZ, "POINT CLOUD Z RANGE")) ;
-    gui->addWidgetDown(new ofxUISlider(length, dim, 0.0f , 255.0f , meshHueOffset , "MESH HUE OFFSET")) ;
+    gui->addWidgetDown(new ofxUIRangeSlider(guiWidth, dim, 0.0, 255.0, farThreshold, nearThreshold, "DEPTH RANGE"));
+    gui->addWidgetDown(new ofxUIRangeSlider(guiWidth, dim, 0.0, ((kinect.width * kinect.height ) / 2 ), minBlobSize , maxBlobSize, "BLOB SIZE"));
+    
+    gui->addWidgetDown(new ofxUIToggle("THRESHOLD OPENCV" , bThreshWithOpenCV , dim , dim ) ) ;
+    gui->addWidgetDown(new ofxUIToggle("DRAW POINT CLOUD" , bDrawPointCloud , dim , dim ) ) ;
+    
+    gui->addWidgetDown(new ofxUISlider(guiWidth, dim,  -30.0f  , 30.0f  , angle , "MOTOR ANGLE")) ;
+    gui->addWidgetDown(new ofxUIRangeSlider(guiWidth, dim, 0 , 2000 , pointCloudMinZ , pointCloudMaxZ, "Z RANGE")) ;
+    gui->addWidgetDown(new ofxUIToggle("OPEN KINECT" , bKinectOpen , dim , dim ) ) ;
     
     ofAddListener(gui->newGUIEvent,this,&testApp::guiEvent);
     gui->loadSettings("GUI/kinectSettings.xml") ;
@@ -67,6 +62,7 @@ void testApp::update() {
 	
 	ofBackground(100, 100, 100);
 	
+    ofSetWindowTitle( "Kinect Workshop Start - FPS:"+ ofToString( ofGetElapsedTimef() ) ) ; 
 	kinect.update();
 	
 	// there is a new frame and we are connected
@@ -117,7 +113,8 @@ void testApp::update() {
 void testApp::draw() {
 	
 	ofSetColor(255, 255, 255);
-	
+    ofPushMatrix() ; 
+	ofTranslate( guiWidth + 10 , 0 ) ;
 	if(bDrawPointCloud) {
 		easyCam.begin();
 		drawPointCloud();
@@ -134,32 +131,36 @@ void testApp::draw() {
 		kinect2.draw(420, 320, 400, 300);
 #endif
 	}
+    
+    ofPopMatrix() ;
 	
-	// draw instructions
-	ofSetColor(255, 255, 255);
-	stringstream reportStream;
-	reportStream << "accel is: " << ofToString(kinect.getMksAccel().x, 2) << " / "
-	<< ofToString(kinect.getMksAccel().y, 2) << " / "
-	<< ofToString(kinect.getMksAccel().z, 2) << endl
-	<< "press p to switch between images and point cloud, rotate the point cloud with the mouse" << endl
-	<< "using opencv threshold = " << bThreshWithOpenCV <<" (press spacebar)" << endl
-	<< "set near threshold " << nearThreshold << " (press: + -)" << endl
-	<< "set far threshold " << farThreshold << " (press: < >) num blobs found " << contourFinder.nBlobs
-	<< ", fps: " << ofGetFrameRate() << endl
-	<< "press c to close the connection and o to open it again, connection is: " << kinect.isConnected() << endl
-	<< "press UP and DOWN to change the tilt angle: " << angle << " degrees" << endl;
-	ofDrawBitmapString(reportStream.str(),20,652);
+    //to debug to the screen use
+    //ofDrawBitmapString( "STRING" , x , y ) ;
+    
+    
 }
 
-void testApp::drawPointCloud() {
+void testApp::drawPointCloud()
+{
 	int w = 640;
 	int h = 480;
 	ofMesh mesh;
 	mesh.setMode(OF_PRIMITIVE_POINTS);
+    
+    /* 
+     Change the color based on time. You can use ofGetElapsedTimef() which returns
+     a float for how many seconds this app has been running
+     
+     in can be used such as :
+        sin( ofGetElapsedTimef() )
+        ofNoise( ofGetElapsedTimef() )
+     
+     for interesting repeating animation patterns
+     
+     ofColor has a function called "fromHSB( hue , saturation , brightness )" that allows for easy color offset
+     */
+    
 	int step = 2;
-    int timeHue = ofGetElapsedTimef() * meshHueOffset ;
-    timeHue %= 255 ; 
-    ofColor hueOffset = ofColor::fromHsb( timeHue , 255.0f , 255.0f ) ;
 	for(int y = 0; y < h; y += step) {
 		for(int x = 0; x < w; x += step) {
 			if(kinect.getDistanceAt(x, y) > 0) {
@@ -168,7 +169,10 @@ void testApp::drawPointCloud() {
                 if ( vertex.z > pointCloudMinZ && vertex.z < pointCloudMaxZ )
                 {
                     mesh.addVertex( vertex );
-                    ofColor col = kinect.getColorAt(x,y) + hueOffset ;
+                    
+                    //Offset the color here
+                    ofColor col = kinect.getColorAt(x,y) ; // + ?
+                    
                     mesh.addColor( col );
                 }
 				
@@ -177,12 +181,12 @@ void testApp::drawPointCloud() {
 	}
 	glPointSize(3);
 	ofPushMatrix();
-	// the projected points are 'upside down' and 'backwards' 
-	ofScale(1, -1, -1);
-	ofTranslate(0, 0, -1000); // center the points a bit
-	glEnable(GL_DEPTH_TEST);
-	mesh.drawVertices();
-	glDisable(GL_DEPTH_TEST);
+        // the projected points are 'upside down' and 'backwards' 
+        ofScale(1, -1, -1);
+        ofTranslate(0, 0, -1000); // center the points a bit
+        glEnable(GL_DEPTH_TEST);
+            mesh.drawVertices();
+        glDisable(GL_DEPTH_TEST);
 	ofPopMatrix();
 }
 
@@ -200,42 +204,54 @@ void testApp::guiEvent(ofxUIEventArgs &e)
         nearThreshold = slider->getScaledValueHigh() ; 
 	}
     
-    if(name == "OPENCV BLOB SIZE")
+    if(name == "BLOB SIZE")
 	{
 		ofxUIRangeSlider *slider = (ofxUIRangeSlider *) e.widget;
         minBlobSize = slider->getScaledValueLow() ;
         maxBlobSize = slider->getScaledValueHigh() ;
 	}
     
-    if(name == "POINT CLOUD Z RANGE" )
+    if(name == "Z RANGE" )
 	{
 		ofxUIRangeSlider *slider = (ofxUIRangeSlider *) e.widget;
         pointCloudMinZ = slider->getScaledValueLow() ;
         pointCloudMaxZ = slider->getScaledValueHigh() ;
 	}
     
-    if(name == "MESH HUE OFFSET" )
+    if(name == "THRESHOLD OPENCV" )
+	{
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+        bThreshWithOpenCV = toggle->getValue() ;
+	}
+    
+    if(name == "DRAW POINT CLOUD" )
+	{
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+        bDrawPointCloud = toggle->getValue() ;
+	}
+    
+    if(name == "MOTOR ANGLE" )
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
-        meshHueOffset = slider->getScaledValue() ;
+        angle = slider->getScaledValue() ;
+        kinect.setCameraTiltAngle(angle);
 	}
-
-
-    //gui->addWidgetDown(new ofxUISlider(length, dim, 0.0f , 255.0f , meshHueOffset , "MESH HUE OFFSET")) ;
     
-
+    if(name == "OPEN KINECT" )
+	{
+		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+        bKinectOpen = toggle->getValue() ;
+        if ( bKinectOpen == true )
+            kinect.open() ;
+        else
+            kinect.close() ;
+	}
     
-    /*
-         gui->addWidgetDown(new ofxUIRangeSlider(length, dim, -1000, 1000 , pointCloudMinZ , pointCloudMaxZ, "POINT CLOUD Z RANGE")) ;
-     */
-    //gui->addWidgetDown(new ofxUIRangeSlider(length, dim, 0.0, 255.0, minBlobSize , maxBlobSize, "OPENCV BLOB SIZE"));
-    //gui->addWidgetRight(new ofxUIRangeSlider(dim, 80, 0.0, 255.0, farThreshold, nearThreshold, "DEPTH RANGE"));
     gui->saveSettings("GUI/kinectSettings.xml") ; 
 }
 
 //--------------------------------------------------------------
 void testApp::exit() {
-	kinect.setCameraTiltAngle(0); // zero the tilt on exit
 	kinect.close();
 	
 #ifdef USE_TWO_KINECTS
@@ -246,62 +262,14 @@ void testApp::exit() {
 //--------------------------------------------------------------
 void testApp::keyPressed (int key) {
 	switch (key) {
-		case ' ':
-			bThreshWithOpenCV = !bThreshWithOpenCV;
-			break;
+		
+        // example of how to create a keyboard event
+            
+		case 'A':
+        case 'a':
+            //...do things
+            break ; 
 			
-		case'p':
-			bDrawPointCloud = !bDrawPointCloud;
-			break;
-			
-		case '>':
-		case '.':
-			farThreshold ++;
-			if (farThreshold > 255) farThreshold = 255;
-			break;
-			
-		case '<':
-		case ',':
-			farThreshold --;
-			if (farThreshold < 0) farThreshold = 0;
-			break;
-			
-		case '+':
-		case '=':
-			nearThreshold ++;
-			if (nearThreshold > 255) nearThreshold = 255;
-			break;
-			
-		case '-':
-			nearThreshold --;
-			if (nearThreshold < 0) nearThreshold = 0;
-			break;
-			
-		case 'w':
-			kinect.enableDepthNearValueWhite(!kinect.isDepthNearValueWhite());
-			break;
-			
-		case 'o':
-			kinect.setCameraTiltAngle(angle); // go back to prev tilt
-			kinect.open();
-			break;
-			
-		case 'c':
-			kinect.setCameraTiltAngle(0); // zero the tilt
-			kinect.close();
-			break;
-			
-		case OF_KEY_UP:
-			angle++;
-			if(angle>30) angle=30;
-			kinect.setCameraTiltAngle(angle);
-			break;
-			
-		case OF_KEY_DOWN:
-			angle--;
-			if(angle<-30) angle=-30;
-			kinect.setCameraTiltAngle(angle);
-			break;
 	}
 }
 

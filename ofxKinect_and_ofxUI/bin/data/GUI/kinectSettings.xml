@@ -1,23 +1,38 @@
 <Widget>
     <Kind>6</Kind>
     <Name>DEPTH RANGE</Name>
-    <HighValue>254.182998657</HighValue>
-    <LowValue>193.701919556</LowValue>
+    <HighValue>255.000000000</HighValue>
+    <LowValue>201.980194092</LowValue>
 </Widget>
 <Widget>
     <Kind>6</Kind>
-    <Name>OPENCV BLOB SIZE</Name>
-    <HighValue>114215.390625000</HighValue>
-    <LowValue>32492.308593750</LowValue>
+    <Name>BLOB SIZE</Name>
+    <HighValue>107976.203125000</HighValue>
+    <LowValue>42582.179687500</LowValue>
 </Widget>
 <Widget>
-    <Kind>6</Kind>
-    <Name>POINT CLOUD Z RANGE</Name>
-    <HighValue>1403.846191406</HighValue>
-    <LowValue>397.435913086</LowValue>
+    <Kind>2</Kind>
+    <Name>THRESHOLD OPENCV</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>DRAW POINT CLOUD</Name>
+    <Value>0</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
-    <Name>MESH HUE OFFSET</Name>
-    <Value>44.134616852</Value>
+    <Name>MOTOR ANGLE</Name>
+    <Value>19.900989532</Value>
+</Widget>
+<Widget>
+    <Kind>6</Kind>
+    <Name>Z RANGE</Name>
+    <HighValue>1693.069335938</HighValue>
+    <LowValue>0.000000000</LowValue>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>OPEN KINECT</Name>
+    <Value>1</Value>
 </Widget>

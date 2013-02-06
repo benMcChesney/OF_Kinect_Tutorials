@@ -1,5 +1,14 @@
 #pragma once
 
+/*
+ 
+ BASED off of the original ofxKinect example !
+ github.com/ofTheo/ofxKinect
+ 
+ I just added ofxUI and made some stuff a little easier to digest
+ 
+ */
+
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "ofxKinect.h"'
@@ -24,6 +33,8 @@ public:
 	void mousePressed(int x, int y, int button);
 	void mouseReleased(int x, int y, int button);
 	void windowResized(int w, int h);
+    
+    void setup_ofxUI() ;
 	
 	ofxKinect kinect;
 	
@@ -52,10 +63,13 @@ public:
     
     //added for ofxUI
     ofxUICanvas *gui;
+    float guiWidth ; 
 	void guiEvent(ofxUIEventArgs &e);
     
     float minBlobSize , maxBlobSize ;
     float pointCloudMinZ , pointCloudMaxZ ;
     
-    float meshHueOffset ;
+    bool bKinectOpen ;
+    
+    
 };
