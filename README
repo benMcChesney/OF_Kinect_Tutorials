@@ -8,6 +8,29 @@ This github repository hosts my examples for teaching students how to use a KINE
 	Allows a user to read in an exported pose and determing if the pose is being made
 	Fires off a simple event system for POSE_START, POSE_RECOGNZIED , and POSE_END
 	
+3 ) ofxKinect_and_ShaderFun uses ofxKinect point cloud to create cube vertices and then 	changes them with a vertex and fragment shader to make generative shapes
+
+4 ) ofxKinect_and_ShaderOutlineMask/
+	 uses the 2D openCV outline to mask out another texture, in this case a fragment shader from glsl.heroku.com uses add-on ofxSimpleMask
+
+5 ) ofxKinect_and_ofxUI/ 
+	starting point for ofxKinect with openCV using ofxUI to make changes
+
+6 ) ofxKinect_and_ofxUI_cursors/
+	normalizes openCV blobs and scales them to screen space
+
+7 ) ofxKinect_and_ofxUI_cursors_ribbons/
+	use the scaled cursor position data to draw 3d ribbons and render it with a camera
+
+8 ) ofxKinect_and_ofxUI_pointcloud/
+	using ofxUI to render and do things with the point cloud data
+
+9 ) ofxKinect_and_ofxUI_pointcloud_splicing/
+	more effects to color based on positions and generative functions
+
+10 ) openNI-demoAllFeatures_stable/
+	openNI demo, not changed yet. I will add in ofxUI
+
 	/* future additions will be added !!!! */
 	
 	Non-core addons : ofxUI 
