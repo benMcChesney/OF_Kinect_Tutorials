@@ -1,0 +1,58 @@
+<Widget>
+    <Kind>6</Kind>
+    <Name>DEPTH RANGE</Name>
+    <HighValue>255.000000000</HighValue>
+    <LowValue>0.000000000</LowValue>
+</Widget>
+<Widget>
+    <Kind>6</Kind>
+    <Name>BLOB SIZE</Name>
+    <HighValue>146756.437500000</HighValue>
+    <LowValue>123944.562500000</LowValue>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>DRAW POINT CLOUD</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>MOTOR ANGLE</Name>
+    <Value>-0.594058990</Value>
+</Widget>
+<Widget>
+    <Kind>6</Kind>
+    <Name>Z RANGE</Name>
+    <HighValue>1009.901062012</HighValue>
+    <LowValue>0.000000000</LowValue>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>OPEN KINECT</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>USE SHADER</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>SHADER FLOAT 1</Name>
+    <Value>8.910891533</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>SHADER FLOAT 2</Name>
+    <Value>33.663364410</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>SHADER FLOAT 3</Name>
+    <Value>75.247528076</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>SHADER FLOAT 4</Name>
+    <Value>141.584152222</Value>
+</Widget>

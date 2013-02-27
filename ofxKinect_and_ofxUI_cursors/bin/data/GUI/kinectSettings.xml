@@ -1,8 +1,8 @@
 <Widget>
     <Kind>6</Kind>
     <Name>DEPTH RANGE</Name>
-    <HighValue>247.425750732</HighValue>
-    <LowValue>237.326736450</LowValue>
+    <HighValue>255.000000000</HighValue>
+    <LowValue>229.752487183</LowValue>
 </Widget>
 <Widget>
     <Kind>6</Kind>
@@ -16,20 +16,9 @@
     <Value>1</Value>
 </Widget>
 <Widget>
-    <Kind>2</Kind>
-    <Name>DRAW POINT CLOUD</Name>
-    <Value>0</Value>
-</Widget>
-<Widget>
     <Kind>4</Kind>
     <Name>MOTOR ANGLE</Name>
     <Value>19.900989532</Value>
-</Widget>
-<Widget>
-    <Kind>6</Kind>
-    <Name>Z RANGE</Name>
-    <HighValue>1693.069335938</HighValue>
-    <LowValue>0.000000000</LowValue>
 </Widget>
 <Widget>
     <Kind>2</Kind>

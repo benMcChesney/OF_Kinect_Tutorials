@@ -45,12 +45,8 @@ void testApp::setup_ofxUI()
 	gui->addWidgetDown(new ofxUILabel("KINECT PARAMS", OFX_UI_FONT_MEDIUM ));
     gui->addWidgetDown(new ofxUIRangeSlider(guiWidth, dim, 0.0, 255.0, farThreshold, nearThreshold, "DEPTH RANGE"));
     gui->addWidgetDown(new ofxUIRangeSlider(guiWidth, dim, 0.0, ((kinect.width * kinect.height ) / 2 ), minBlobSize , maxBlobSize, "BLOB SIZE"));
-    
-    gui->addWidgetDown(new ofxUIToggle("THRESHOLD OPENCV" , bThreshWithOpenCV , dim , dim ) ) ;
-    gui->addWidgetDown(new ofxUIToggle("DRAW POINT CLOUD" , bDrawPointCloud , dim , dim ) ) ;
-    
+    gui->addWidgetDown(new ofxUIToggle("THRESHOLD OPENCV" , bThreshWithOpenCV , dim , dim ) ); 
     gui->addWidgetDown(new ofxUISlider(guiWidth, dim,  -30.0f  , 30.0f  , angle , "MOTOR ANGLE")) ;
-    gui->addWidgetDown(new ofxUIRangeSlider(guiWidth, dim, 0 , 2000 , pointCloudMinZ , pointCloudMaxZ, "Z RANGE")) ;
     gui->addWidgetDown(new ofxUIToggle("OPEN KINECT" , bKinectOpen , dim , dim ) ) ;
     
     ofAddListener(gui->newGUIEvent,this,&testApp::guiEvent);
@@ -115,12 +111,7 @@ void testApp::draw() {
 	ofSetColor(255, 255, 255);
     ofPushMatrix() ; 
 	ofTranslate( guiWidth + 10 , 0 ) ;
-	if(bDrawPointCloud) {
-		easyCam.begin();
-		drawPointCloud();
-		easyCam.end();
-	} else {
-		// draw from the live kinect
+			// draw from the live kinect
 		kinect.drawDepth(10, 10, 400, 300);
 		kinect.draw(420, 10, 400, 300);
 		
@@ -130,7 +121,7 @@ void testApp::draw() {
 #ifdef USE_TWO_KINECTS
 		kinect2.draw(420, 320, 400, 300);
 #endif
-	}
+	
     
     ofPopMatrix() ;
 	
@@ -139,58 +130,6 @@ void testApp::draw() {
     
     
 }
-
-void testApp::drawPointCloud()
-{
-	int w = 640;
-	int h = 480;
-	ofMesh mesh;
-	mesh.setMode(OF_PRIMITIVE_POINTS);
-    
-    /* 
-     Change the color based on time. You can use ofGetElapsedTimef() which returns
-     a float for how many seconds this app has been running
-     
-     in can be used such as :
-        sin( ofGetElapsedTimef() )
-        ofNoise( ofGetElapsedTimef() )
-     
-     for interesting repeating animation patterns
-     
-     ofColor has a function called "fromHSB( hue , saturation , brightness )" that allows for easy color offset
-     */
-    
-	int step = 2;
-	for(int y = 0; y < h; y += step) {
-		for(int x = 0; x < w; x += step) {
-			if(kinect.getDistanceAt(x, y) > 0) {
-				
-                ofVec3f vertex = kinect.getWorldCoordinateAt(x, y) ;
-                if ( vertex.z > pointCloudMinZ && vertex.z < pointCloudMaxZ )
-                {
-                    mesh.addVertex( vertex );
-                    
-                    //Offset the color here
-                    ofColor col = kinect.getColorAt(x,y) ; // + ?
-                    
-                    mesh.addColor( col );
-                }
-				
-			}
-		}
-	}
-	glPointSize(3);
-	ofPushMatrix();
-        // the projected points are 'upside down' and 'backwards' 
-        ofScale(1, -1, -1);
-        ofTranslate(0, 0, -1000); // center the points a bit
-        glEnable(GL_DEPTH_TEST);
-            mesh.drawVertices();
-        glDisable(GL_DEPTH_TEST);
-	ofPopMatrix();
-}
-
-
 //--------------------------------------------------------------
 void testApp::guiEvent(ofxUIEventArgs &e)
 {
@@ -211,23 +150,10 @@ void testApp::guiEvent(ofxUIEventArgs &e)
         maxBlobSize = slider->getScaledValueHigh() ;
 	}
     
-    if(name == "Z RANGE" )
-	{
-		ofxUIRangeSlider *slider = (ofxUIRangeSlider *) e.widget;
-        pointCloudMinZ = slider->getScaledValueLow() ;
-        pointCloudMaxZ = slider->getScaledValueHigh() ;
-	}
-    
     if(name == "THRESHOLD OPENCV" )
 	{
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
         bThreshWithOpenCV = toggle->getValue() ;
-	}
-    
-    if(name == "DRAW POINT CLOUD" )
-	{
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-        bDrawPointCloud = toggle->getValue() ;
 	}
     
     if(name == "MOTOR ANGLE" )

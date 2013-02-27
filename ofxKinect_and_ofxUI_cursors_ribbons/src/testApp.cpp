@@ -57,10 +57,8 @@ void testApp::setup_ofxUI()
     gui->addWidgetDown(new ofxUIRangeSlider(guiWidth, dim, 0.0, ((kinect.width * kinect.height ) / 2 ), minBlobSize , maxBlobSize, "BLOB SIZE"));
     
     gui->addWidgetDown(new ofxUIToggle("THRESHOLD OPENCV" , bThreshWithOpenCV , dim , dim ) ) ;
-    gui->addWidgetDown(new ofxUIToggle("DRAW POINT CLOUD" , bDrawPointCloud , dim , dim ) ) ;
     
     gui->addWidgetDown(new ofxUISlider(guiWidth, dim,  -30.0f  , 30.0f  , angle , "MOTOR ANGLE")) ;
-    gui->addWidgetDown(new ofxUIRangeSlider(guiWidth, dim, 0 , 2000 , pointCloudMinZ , pointCloudMaxZ, "Z RANGE")) ;
     gui->addWidgetDown(new ofxUIToggle("OPEN KINECT" , bKinectOpen , dim , dim ) ) ;
     
     gui->addWidgetDown(new ofxUISlider(guiWidth, dim,  1.0 , 5.0 , cursorXSensitivity , "X SENSITIVITY")) ;
@@ -172,27 +170,30 @@ void testApp::update() {
     
     if ( cursors.size() > 0 )
     {
-        ofVec3f point = cursors[0] ;
-        //if we are using the camera, the mouse moving should rotate it around the whole sculpture
-        if(usecamera){
-            float rotateAmount = ofMap(point.x, 0, point.y , 0, 360);
-            ofVec3f furthestPoint;
-            if (points.size() > 0) {
-                furthestPoint = points[0];
+        for ( int i = 0 ; i < cursors.size() ; i++)
+        {
+            ofVec3f point = cursors[i] ;
+            //if we are using the camera, the mouse moving should rotate it around the whole sculpture
+            if(usecamera){
+                float rotateAmount = ofMap(point.x, 0, point.y , 0, 360);
+                ofVec3f furthestPoint;
+                if (points.size() > 0) {
+                    furthestPoint = points[0];
+                }
+                else
+                {
+                    furthestPoint = ofVec3f(point.x, point.y, 0);
+                }
+                
+                ofVec3f directionToFurthestPoint = (furthestPoint - center);
+                ofVec3f directionToFurthestPointRotated = directionToFurthestPoint.rotated(rotateAmount, ofVec3f(0,1,0));
+                camera.setPosition(center + directionToFurthestPointRotated);
+                camera.lookAt(center);
             }
-            else
-            {
-                furthestPoint = ofVec3f(point.x, point.y, 0);
+            //otherwise add points like before
+            else{
+                points.push_back( point );
             }
-            
-            ofVec3f directionToFurthestPoint = (furthestPoint - center);
-            ofVec3f directionToFurthestPointRotated = directionToFurthestPoint.rotated(rotateAmount, ofVec3f(0,1,0));
-            camera.setPosition(center + directionToFurthestPointRotated);
-            camera.lookAt(center);
-        }
-        //otherwise add points like before
-        else{
-            points.push_back( point );
         }
 
     }
@@ -201,7 +202,7 @@ void testApp::update() {
     
     ofQuaternion xRotation , yRotation ;
     xRotation.makeRotate( sin( ofGetElapsedTimef() ), 1.0f, 0.0f, 0.0f ) ;
-    xRotation.makeRotate( cos( ofGetElapsedTimef() ), 0.0f, 1.0f, 0.0f ) ;
+    yRotation.makeRotate( cos( ofGetElapsedTimef() ), 0.0f, 1.0f, 0.0f ) ;
     
     ofQuaternion lightRotation = xRotation * yRotation ;
     
@@ -214,23 +215,21 @@ void testApp::draw() {
 	ofSetColor(255, 255, 255);
     ofPushMatrix() ; 
 	ofTranslate( guiWidth + 10 , 0 ) ;
-	if(bDrawPointCloud) {
-    
-	} else {
+
                
-        ofEnableAlphaBlending() ; 
-        ofPushMatrix() ;
-        ofTranslate( ofGetWidth() - 210 - guiWidth - 10  , ofGetHeight() - 160 ) ;
-		// draw from the live kinect
-		kinect.drawDepth(0 , 0, 200 , 150 );
+    ofEnableAlphaBlending() ; 
+    ofPushMatrix() ;
+    ofTranslate( ofGetWidth() - 210 - guiWidth - 10  , ofGetHeight() - 160 ) ;
+    // draw from the live kinect
+    kinect.drawDepth(0 , 0, 200 , 150 );
         
-        ofSetColor( 255 , 65 ) ;
-		kinect.draw(0, 0, 200 , 150);
-		contourFinder.draw(0, 0, 200, 150);
-        ofPopMatrix() ; 
+    ofSetColor( 255 , 65 ) ;
+    kinect.draw(0, 0, 200 , 150);
+    contourFinder.draw(0, 0, 200, 150);
+    ofPopMatrix() ;
         
 
-	}
+	
     
     ofPopMatrix() ;
 
@@ -273,7 +272,7 @@ void testApp::draw() {
         
 		//get the normalized direction. normalized vectors always have a length of one
 		//and are really useful for representing directions as opposed to something with length
-		ofVec3f unitDirection = direction.normalized();
+		ofVec3f unitDirection = direction.normalized() + 0.1f ;
         
 		//find both directions to the left and to the right
 		ofVec3f toTheLeft = unitDirection.getRotated(-90, ofVec3f(0,0,1));
@@ -343,25 +342,13 @@ void testApp::guiEvent(ofxUIEventArgs &e)
         maxBlobSize = slider->getScaledValueHigh() ;
 	}
     
-    if(name == "Z RANGE" )
-	{
-		ofxUIRangeSlider *slider = (ofxUIRangeSlider *) e.widget;
-        pointCloudMinZ = slider->getScaledValueLow() ;
-        pointCloudMaxZ = slider->getScaledValueHigh() ;
-	}
-    
     if(name == "THRESHOLD OPENCV" )
 	{
 		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
         bThreshWithOpenCV = toggle->getValue() ;
 	}
     
-    if(name == "DRAW POINT CLOUD" )
-	{
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-        bDrawPointCloud = toggle->getValue() ;
-	}
-    
+
     if(name == "MOTOR ANGLE" )
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;

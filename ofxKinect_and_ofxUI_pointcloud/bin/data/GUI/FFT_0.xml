@@ -1,0 +1,101 @@
+<Widget>
+    <Kind>4</Kind>
+    <Name>CENTER OFFSET</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>GLOBAL EXTRUSION</Name>
+    <Value>170.09</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>MAX EXTRUSION</Name>
+    <Value>273.675</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>BAR WIDTH</Name>
+    <Value>5.83333</Value>
+</Widget>
+<Widget>
+    <Kind>11</Kind>
+    <Name>X + Y</Name>
+    <XValue>70.0171</XValue>
+    <YValue>326.4</YValue>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>DRAW FILL</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>DRAW BOTH SIDES</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>NOISE TIME MULTIPLIER</Name>
+    <Value>0.291026</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>NOISE STRENGTH</Name>
+    <Value>10.2564</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>NOISE INDEX MULTIPLIER</Name>
+    <Value>1.50427</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>AMPLITUDE MULTIPLIER</Name>
+    <Value>16.2393</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>HUE</Name>
+    <Value>13.8462</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>SATURATION</Name>
+    <Value>341.538</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>BRIGHTNESS</Name>
+    <Value>344.615</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>HUE FFT MULTIPLIER</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>AMPLITUDE DIFF MULTIPLIER</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>CLEAR ALPHA</Name>
+    <Value>255</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>GLOBAL AMPLITUDE SCALE</Name>
+    <Value>401.709</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>INTERPOLATE TIME</Name>
+    <Value>0.0042735</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>HUE TIME MULTIPLIER</Name>
+    <Value>0.833333</Value>
+</Widget>

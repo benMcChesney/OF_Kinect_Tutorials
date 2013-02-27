@@ -1,0 +1,48 @@
+<Widget>
+    <Kind>6</Kind>
+    <Name>DEPTH RANGE</Name>
+    <HighValue>215.000000000</HighValue>
+    <LowValue>115.866348267</LowValue>
+</Widget>
+<Widget>
+    <Kind>6</Kind>
+    <Name>BLOB SIZE</Name>
+    <HighValue>146756.437500000</HighValue>
+    <LowValue>59310.890625000</LowValue>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>DRAW POINT CLOUD</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>NORMALIZED RANGE X</Name>
+    <Value>0.024761980</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>NORMALIZED RANGE Y</Name>
+    <Value>0.076732673</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>NORMALIZED RANGE Z</Name>
+    <Value>0.190594062</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>MOTOR ANGLE</Name>
+    <Value>6.534656525</Value>
+</Widget>
+<Widget>
+    <Kind>6</Kind>
+    <Name>Z RANGE</Name>
+    <HighValue>1128.712890625</HighValue>
+    <LowValue>465.346557617</LowValue>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>OPEN KINECT</Name>
+    <Value>1</Value>
+</Widget>

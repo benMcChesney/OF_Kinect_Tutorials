@@ -49,15 +49,11 @@ public:
 	ofxCvContourFinder contourFinder;
 	
 	bool bThreshWithOpenCV;
-	bool bDrawPointCloud;
 	
 	int nearThreshold;
 	int farThreshold;
 	
 	int angle;
-	
-	// used for viewing the point cloud
-	ofEasyCam easyCam;
     
     //added for ofxUI
     ofxUICanvas *gui;
@@ -65,7 +61,6 @@ public:
 	void guiEvent(ofxUIEventArgs &e);
     
     float minBlobSize , maxBlobSize ;
-    float pointCloudMinZ , pointCloudMaxZ ;
     
     bool bKinectOpen ;
     
@@ -89,6 +84,8 @@ public:
     
     ofLight light ;
     
-    int maxCursors ; 
+    int maxCursors ;
+    
+    
     
 };
