@@ -1,0 +1,19 @@
+<joint label="TORSO" connect=0 ></joint>
+<joint label="SHOULDER CENTER" connect=0 ></joint>
+<joint label="HEAD" connect=1 ></joint>
+<joint label="L SHOULDER" connect=1 ></joint>
+<joint label="L ELBOW" connect=3 ></joint>
+<joint label="L HAND" connect=4 ></joint>
+<joint label="R SHOULDER" connect=1 ></joint>
+<joint label="R ELBOW" connect=6 ></joint>
+<joint label="R HAND" connect=7 ></joint>
+<joint label="L HIP" connect=0 ></joint>
+<joint label="L KNEE" connect=9 ></joint>
+<joint label="L FOOT" connect=10 ></joint>
+<joint label="R HIP" connect=0 ></joint>
+<joint label="R KNEE" connect=12 ></joint>
+<joint label="R FOOT" connect=13 ></joint>
+
+
+
+

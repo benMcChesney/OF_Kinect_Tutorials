@@ -14,14 +14,14 @@ class BasicSkeleton
 		BasicSkeleton( ) { } 
 		~BasicSkeleton( ) { } 
 
-		void setup ( ) ;
+		void setup ( bool _bUseOpenNI = true ) ;
 		void update ( ) ;
 		void updateOsc( ) ; 
 		void draw( ) ; 
-
+    
 		//Loading default XML data
-		void loadLabelsFromXml( ) ;
-		void loadDefaultLayoutPositions( ) ;
+		void loadLabelsFromXml( string path ) ;
+		void loadDefaultLayoutPositions( string path ) ;
 		void saveDefaultLayoutPositions( ) ; 
 
 		//Keep a vector of Skeleton Joints
@@ -37,9 +37,10 @@ class BasicSkeleton
 
 		//Debug drawing
 		bool bDrawLabels ; 
-		bool bDrawAngles ; 
+		bool bDrawAngles ;
+        bool bUseOpenNI ;
 
-		void toggleLabels() ; 
+		void toggleLabels() ;
 
 		//OSC reciever
 		ofxOscReceiver * osc ; 

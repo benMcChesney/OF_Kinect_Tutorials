@@ -1,0 +1,15 @@
+<gestureName>T_STANCE</gestureName>
+<gesture>
+    <angle>180.658538818</angle>
+    <jointIndex>5</jointIndex>
+    <angle>179.370407104</angle>
+    <jointIndex>4</jointIndex>
+    <angle>184.343246460</angle>
+    <jointIndex>3</jointIndex>
+    <angle>355.962280273</angle>
+    <jointIndex>6</jointIndex>
+    <angle>359.341430664</angle>
+    <jointIndex>7</jointIndex>
+    <angle>1.718383789</angle>
+    <jointIndex>8</jointIndex>
+</gesture>

@@ -1,0 +1,47 @@
+<Widget>
+    <Kind>6</Kind>
+    <Name>DEPTH RANGE</Name>
+    <HighValue>255.000000000</HighValue>
+    <LowValue>231.480590820</LowValue>
+</Widget>
+<Widget>
+    <Kind>6</Kind>
+    <Name>BLOB SIZE</Name>
+    <HighValue>136450.484375000</HighValue>
+    <LowValue>2982.524902344</LowValue>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>THRESHOLD OPENCV</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>MOTOR ANGLE</Name>
+    <Value>19.900989532</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>OPEN KINECT</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>X SENSITIVITY</Name>
+    <Value>1.970873833</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>Y SENSITIVITY</Name>
+    <Value>2.009708881</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>RESTRICT CURSORS</Name>
+    <Value>1</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>CURSOR BORDER PADDING</Name>
+    <Value>50.000000000</Value>
+</Widget>

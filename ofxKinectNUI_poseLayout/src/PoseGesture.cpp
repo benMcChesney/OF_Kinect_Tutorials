@@ -60,9 +60,11 @@ void PoseGesture::checkGesture( BasicSkeleton skeleton )
 	bool bBroken = false ; 
 	for ( int i = 0 ; i < angles.size() ; i++ ) 
 	{
-		float angleDiff = skeleton.joints[  jointIndicies[i]  ].connectionAngle - angles[i] ;  
+		float angleDiff = skeleton.joints[  jointIndicies[i]  ].connectionAngle - angles[i] ;
+        angleDiff = ofWrapDegrees( angleDiff ) ;
+        
 		//Get the absolute difference
-		if ( abs(angleDiff) > angleTolerance ) 
+		if ( angleDiff > angleTolerance )
 		{
 			//ANGLE IS TOO FAR OFF
 			angleDiff = 0 ; 

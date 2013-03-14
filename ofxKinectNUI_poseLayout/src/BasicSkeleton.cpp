@@ -1,16 +1,15 @@
 #include "BasicSkeleton.h"
 
-void BasicSkeleton::setup ( ) 
+void BasicSkeleton::setup ( bool _bUseOpenNI ) 
 {
+    bUseOpenNI = _bUseOpenNI ; 
 	//Default stuff out
 	bDetected = false ; 
-	loadLabelsFromXml( )  ; 
-	loadDefaultLayoutPositions( ) ; 
 	bDrawLabels = true ; 
 	bDrawAngles = true ; 
 
 	osc = new ofxOscReceiver( ) ; 
-	osc->setup( 54321 ) ; 
+	osc->setup( 12345 ) ; 
 
 	//I just eyeballed these numbers, seemed to center the skeleton on the screen well
 	skeletonBounds = ofRectangle( 300 , 300 , 300 , 300 ) ; 
@@ -46,18 +45,28 @@ void BasicSkeleton::updateOsc( )
 		
 		
 		//cout << "message address : " << m.getAddress() << endl ;
-		if ( m.getAddress() == "skeletonData/" ) 
+		if ( m.getAddress().compare("skeletonData/") == 0  )
 		{
 			loop++ ; 
-			int numArgs = m.getNumArgs() ; 
-			int argNum = 0 ; 
+			int numArgs = m.getNumArgs() ;
+			int argNum = 0 ;
+            
+            int numJoints = 0 ;
+            if ( !bUseOpenNI )
+                numJoints = 20 ;
+            if ( bUseOpenNI )
+                numJoints = 15 ;
+            
 			//We have 20 joints !
-			for ( int j = 0 ; j < 20 ; j++ ) 
+			for ( int j = 0 ; j < numJoints ; j++ ) 
 			{
 				//cout << "@ joint : " << j << endl ; 
-				joints[j].position.x = m.getArgAsFloat( argNum ) * skeletonBounds.width + skeletonBounds.x ; 
-				joints[j].position.y = ( -m.getArgAsFloat( argNum+1 ) ) * skeletonBounds.height + skeletonBounds.y ;
-				//cout << " raw x : " <<  m.getArgAsFloat( argNum ) << " , raw y : " <<  m.getArgAsFloat( argNum+1 ) << endl ;
+				joints[j].position.x = m.getArgAsFloat( argNum ) * skeletonBounds.width + skeletonBounds.x ;
+                //Kinect SDK has the Y positions updside down
+                if ( !bUseOpenNI )
+                    joints[j].position.y = ( -m.getArgAsFloat( argNum+1 ) ) * skeletonBounds.height + skeletonBounds.y ;
+                if ( bUseOpenNI )
+                    joints[j].position.y = ( m.getArgAsFloat( argNum+1 ) ) * skeletonBounds.height + skeletonBounds.y ;
 				argNum += 2 ;
 			}
 			return ; 
@@ -106,9 +115,11 @@ void BasicSkeleton::draw( )
 	}
 }
 
-void BasicSkeleton::loadLabelsFromXml( ) 
+void BasicSkeleton::loadLabelsFromXml( string path ) 
 {
-	jointXml.loadFile( "jointLabels.xml" ) ; 
+    //OpenNI Layout : openNI_jointLabels
+    //Kinect SDK Layout : kinectSDK_jointLabels.xml
+	jointXml.loadFile( path ) ; 
 
 	int numJoints = jointXml.getNumTags( "joint" ) ;
 	for ( int i = 0 ; i < numJoints ; i++ ) 
@@ -123,10 +134,10 @@ void BasicSkeleton::loadLabelsFromXml( )
 	}
 }
 
-void BasicSkeleton::loadDefaultLayoutPositions( ) 
+void BasicSkeleton::loadDefaultLayoutPositions(  string path )
 {
 	ofxXmlSettings xml ;
-	xml.loadFile( "jointDefaultPosition.xml" ) ; 
+	xml.loadFile( path ) ;
 
 	for ( int i = 0 ; i < joints.size() ; i++ ) 
 	{

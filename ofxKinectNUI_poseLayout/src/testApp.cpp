@@ -3,16 +3,18 @@
 //--------------------------------------------------------------
 void testApp::setup()
 {
-	skeleton.setup( ) ; 
-
+	skeleton.setup( ) ;
+    skeleton.loadLabelsFromXml( "openNI_jointLabels.xml" ) ;
+    skeleton.loadDefaultLayoutPositions( "openNI_default.xml" ) ; 
+    
 	//Start Clear
 	poseHub.setup( ) ;
-	
+
 	//load premade configs from XML
-	poseHub.loadPose( "jesus_pose.xml" ) ; 
-	poseHub.loadPose( "standing_pose.xml" ) ; 
-	poseHub.loadPose( "tStance_pose.xml" ) ;
-	poseHub.loadPose( "raisedHands_pose.xml" ) ; 
+	poseHub.loadPose( "openNI_tStance.xml" ) ;
+	poseHub.loadPose( "openNI_standing.xml" ) ;
+	poseHub.loadPose( "openNI_egyptian.xml" ) ;
+	//poseHub.loadPose( "raisedHands_pose.xml" ) ;
 
 	ofSetFrameRate( 30 ) ; 
 
@@ -35,8 +37,8 @@ void testApp::update(){
 
 //------------------------------------------------v--------------
 void testApp::draw(){
-	skeleton.draw( ) ; 
-
+    
+	skeleton.draw( ) ;
 	poseHub.draw( skeleton ) ; 
 	poseHub.drawDebug( ) ; 
 
@@ -74,7 +76,7 @@ void testApp::keyPressed(int key){
 	{
 		case 's':
 		case 'S':
-			//skeleton.saveDefaultLayoutPositions( ) ; 
+			skeleton.saveDefaultLayoutPositions( ) ; 
 			break; 
 
 		case 'e':

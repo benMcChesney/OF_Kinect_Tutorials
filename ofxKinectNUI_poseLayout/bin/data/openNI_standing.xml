@@ -1,0 +1,19 @@
+<gestureName>STANDING</gestureName>
+<gesture>
+    <angle>269.518554688</angle>
+    <jointIndex>10</jointIndex>
+    <angle>273.394927979</angle>
+    <jointIndex>13</jointIndex>
+    <angle>270.353668213</angle>
+    <jointIndex>11</jointIndex>
+    <angle>272.489562988</angle>
+    <jointIndex>14</jointIndex>
+    <angle>270.000000000</angle>
+    <jointIndex>5</jointIndex>
+    <angle>270.682067871</angle>
+    <jointIndex>4</jointIndex>
+    <angle>272.632446289</angle>
+    <jointIndex>7</jointIndex>
+    <angle>272.898559570</angle>
+    <jointIndex>8</jointIndex>
+</gesture>

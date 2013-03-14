@@ -1,7 +1,7 @@
 <Widget>
     <Kind>2</Kind>
     <Name>LISTEN TO OSC</Name>
-    <Value>0</Value>
+    <Value>1</Value>
 </Widget>
 <Widget>
     <Kind>2</Kind>
@@ -16,10 +16,10 @@
 <Widget>
     <Kind>4</Kind>
     <Name>ANGLE TOLERANCE</Name>
-    <Value>13.9331</Value>
+    <Value>6.194331646</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>
     <Name>POSE HOLD DURATION</Name>
-    <Value>0.53954</Value>
+    <Value>1.076315761</Value>
 </Widget>
